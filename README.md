@@ -22,9 +22,9 @@ console.log(generate());
 
 # API
 
-## `generate(options: Options): string`
+## `generate(options?: Options): string`
 
-### Options:
+### Options (all optional):
 
 * `year` - number in range `1800-2299`
 * `month` - number in range `1-12` where 1 is January and 12 is December
