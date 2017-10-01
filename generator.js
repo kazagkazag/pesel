@@ -57,7 +57,7 @@ function getPesel(options) {
     }
 
     const yearNumber = getYearNumbers(date.getFullYear());
-    const monthNumber = padWithZero(date.getMonth() + 1);
+    const monthNumber = getMonthNumber(date.getFullYear(), date.getMonth() + 1);
     const dayNumber = padWithZero(date.getDate());
     const sex = getSexNumber(options && options.sex);
 
@@ -80,25 +80,21 @@ function getPrettyUniquePesel() {
 }
 
 function getYearNumbers(year) {
-    const getLastTwoDigits = (number) => number.toString().slice(-2);
+    return year.toString().slice(-2);
+}
 
-    if(year < 1800) {
-        throw Error(`Please specify year greater than 1800. Provided ${year}.`);
-    }
-
+function getMonthNumber(year, month) {
     if(year < 1899) {
-        return getLastTwoDigits(year + 80);
+        return month + 80;
     } else if(year < 1999) {
-        return getLastTwoDigits(year);
+        return padWithZero(month);
     } else if(year < 2099) {
-        return getLastTwoDigits(year + 20);
+        return month + 20;
     } else if(year < 2199) {
-        return getLastTwoDigits(year + 40);
+        return month + 40;
     } else if(year < 2299) {
-        return getLastTwoDigits(year + 60);
+        return month + 60;
     } 
-
-    throw Error(`Please specify year smaller than 2299. Provided ${year}.`)
 }
 
 function getSexNumber(sex) {
