@@ -57,10 +57,11 @@ describe("Pesel generator", () => {
         const generated = pesel.generate({
             prettyUnique: true
         });
+        const monthPath = new Date().getDate() < 13 ? new Date().getDate() : (new Date().getDate() % 12) + 20;
 
         expect(isPeselValid(generated)).toBeTruthy;
         expect(generated.slice(0,2)).toBe(padWithZero(currentDate.getMonth() + 1));
-        expect(generated.slice(2,4)).toBe(padWithZero(currentDate.getDate()));
+        expect(generated.slice(2,4)).toBe(monthPath.toString());
         expect(generated.slice(4,6)).toBe(padWithZero(currentDate.getHours()));
         expect(generated.slice(6,8)).toBe(padWithZero(currentDate.getMinutes()));
         expect(generated.slice(8,10)).toBe(padWithZero(currentDate.getSeconds()));

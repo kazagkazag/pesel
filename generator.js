@@ -68,10 +68,12 @@ function getPesel(options) {
 
 function getPrettyUniquePesel() {
     const date = new Date();
+    const currentDayNumber = date.getDate();
+    const monthPart = currentDayNumber < 13 ? currentDayNumber : (currentDayNumber % 12) + 20;
 
     const withoutSum = ""
         + padWithZero(date.getMonth() + 1)
-        + padWithZero(date.getDate())
+        + padWithZero(monthPart)
         + padWithZero(date.getHours())
         + padWithZero(date.getMinutes())
         + padWithZero(date.getSeconds());
